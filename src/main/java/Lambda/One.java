@@ -33,5 +33,10 @@ public class One {
         list.forEach(integer -> {
             System.out.print(" "+integer);
         });
+
+        System.out.println("\n=====================");
+
+        //method reference
+        list.forEach( System.out::print);
     }
 }
