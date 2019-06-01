@@ -65,3 +65,7 @@ Lambda基本结构
           4.一旦结果传递给combiner()或finisher()，它就不会再次传递给accumulator()。
           5.对于非并发收集器，返回的任何结果必须是线程封闭的。这使得集合可以进行并行操作，不需要任何额外的同步。必须实现reduction确保输入被正确分区，分区被隔离处理，并且combiner()仅在accumulator()完成后才进行。
           6.对于并发收集器，可以实现reduction（但不是必须）。 并发reduction是从多个线程并发调用accumulator()，使用的是同一个并发可修改的（线程安全的）结果容器，而不是在accumulator()期间保持结果隔离。并发收集器应在具有Collector.Characteristics.UNORDERED特性或者数据无序时使用。
+分割迭代器(Spliterator)
+    //为了并行遍历元素而设计的一个迭代器，jdk1.8中的集合框架中的数据结构都默认实现了spliterator
+    //迭代器的主要作用就是把集合分成了好几段，每个线程执行一段，因此是线程安全的。
+    //基于modCount的快速失败机制，如果迭代过程中集合元素被修改，会抛出异常
